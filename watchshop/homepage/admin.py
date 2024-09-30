@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Watches,WatchUpload,Wishlist,Cart,CartItem
+from .models import Watches,WatchUpload,Wishlist,Cart,CartItem,WatchReview
 # Register your models here.
 admin.site.register(Watches)
 
@@ -15,3 +15,10 @@ admin.site.register(WatchUpload, WatchUploadAdmin)
 admin.site.register(Wishlist)
 admin.site.register(Cart)
 admin.site.register(CartItem)
+
+
+#WatchReview
+class WatchReviewAdmin(admin.ModelAdmin):
+    list_display = ('user', 'product', 'review_text', 'rating')
+    list_filter = ('rating', 'product')
+admin.site.register(WatchReview, WatchReviewAdmin)

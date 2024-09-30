@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from .views import Home, About, upload, Login, Signup, Logout, ShowProduct,addtowish,show_wishlist,removewish,addtocart,show_cart,removeCart
+from .views import Home, About, upload, Login, Signup, Logout, ShowProduct,addtowish,show_wishlist,removewish,addtocart,show_cart,removeCart,showdata
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -18,6 +18,7 @@ urlpatterns = [
     path('removewish/<int:id>', removewish, name = 'removewish'),
     path('showcart', show_cart, name = 'showcart'),
     path('removeCart/<int:id>', removeCart, name = 'removeCart'),
+    path('dummy', showdata, name = 'dummy')
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

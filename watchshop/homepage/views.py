@@ -3,7 +3,9 @@ from .models import Watches,WatchUpload, Wishlist,Cart,CartItem
 # Create your views here.
 def Home(request):
     watches= WatchUpload.objects.all()
+    # watche= Watches.objects.all()
     context= {'watch': watches}
+    # context1 ={'watch':watche}
     return render(request,'home.html',context)
 
 def About(request):
@@ -21,7 +23,6 @@ def upload(request):
             return redirect('home')
     else:
         form = uploadform()
-    
     return render(request,'watchUpload.html',{'form':form})
 
 # loginpage
@@ -64,8 +65,8 @@ def Logout(request):
 
 from django.shortcuts import get_object_or_404
 def ShowProduct(request, id):
-    product = get_object_or_404(WatchUpload, id=id)
-    return render(request,'product.html',{'product':product})
+    products = get_object_or_404(WatchUpload, id=id)
+    return render(request,'product.html',{'product':products})
 
 #Wishlist
 def addtowish(request, id):
@@ -112,3 +113,15 @@ def removeCart(request, id):
     cart_obj.products.remove(product_rm)
     return render(request, 'cart.html', {"user_products": cart_obj.products.all()})
     
+from django.http import JsonResponse
+def showdata(request):
+    start_text = request.GET.get('param1')
+    watches = list(WatchUpload.objects.filter(name__startswith=start_text).values_list())
+
+    message = {
+               'name': 'Hello Jitin',
+               'watches': watches
+               }
+    
+
+    return JsonResponse(message)

@@ -34,3 +34,11 @@ class CartItem(models.Model):
     user = models.ForeignKey(Cart, on_delete=models.CASCADE, null=True, blank=True)
     product = models.ForeignKey(WatchUpload, on_delete=models.CASCADE)
     cart_count = models.IntegerField(default=1)
+
+
+class WatchReview(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(WatchUpload,on_delete=models.CASCADE)
+    review_text= models.TextField()
+    rating = models.PositiveSmallIntegerField(choices=[(i, str(i)) for i in range(1,6)])
+    
